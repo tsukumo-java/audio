@@ -23,11 +23,12 @@ SET(INC
 )
 
 SET(ENTRY_POINT
-    
+# This is a library/service and therefore should not have
+# An entry point unless it is for testing purposes.
 )
 
 add_jar(tsu-audio ${SRC}
     INCLUDE_JARS ${INC}
     #ENTRY_POINT ${ENTRY_POINT}
-    VERSION ${ARJ_VERSION})
+    VERSION ${AUDIO_VERSION})
 
