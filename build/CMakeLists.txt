@@ -5,16 +5,29 @@ include(UseJava)
 
 project (audio)
 
-set(CMAKE_JAVA_COMPILE_FLAGS "-source" "1.6" "-target" "1.6")
+SET(JAVA_TARGET_VERSION 1.6)
 
-set(AUDIO_MAJOR_VERSION 0)
-set(AUDIO_MINOR_VERSION 1)
-set(AUDIO_PATCH_VERSION 0)
-set(AUDIO_VERSION
+SET(AUDIO_MAJOR_VERSION 0)
+SET(AUDIO_MINOR_VERSION 1)
+SET(AUDIO_PATCH_VERSION 0)
+SET(AUDIO_VERSION
     ${AUDIO_MAJOR_VERSION}.${AUDIO_MINOR_VERSION}.${AUDIO_PATCH_VERSION})
+
+SET(CMAKE_JAVA_COMPILE_FLAGS
+    "-source" ${JAVA_TARGET_VERSION}
+    "-target" ${JAVA_TARGET_VERSION}
+)
 
 SET(SRC
 
+# Utilities
+../utils/AudioConstants.java
+
+# Data structures
+../data/RingBuffer.java
+
+# Manager components
+../manager/AudioManager.java
 
 )
 
@@ -27,7 +40,7 @@ SET(ENTRY_POINT
 # An entry point unless it is for testing purposes.
 )
 
-add_jar(tsu-audio ${SRC}
+add_jar(tsu-audio-j${JAVA_TARGET_VERSION} ${SRC}
     INCLUDE_JARS ${INC}
     #ENTRY_POINT ${ENTRY_POINT}
     VERSION ${AUDIO_VERSION})
